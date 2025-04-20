@@ -1,5 +1,7 @@
-import streamlit as st
+"""Streamlit application for FetchAF with user authentication and navigation."""
+
 import hashlib
+import streamlit as st
 
 # Initialize session state for user data and login status
 if 'users' not in st.session_state:
@@ -237,6 +239,7 @@ st.markdown(
 
 # Function to navigate to main.py
 def navigate_to_main():
+    """Navigate to the main application page."""
     try:
         st.switch_page("pages/main.py")
     except Exception as e:
@@ -244,10 +247,12 @@ def navigate_to_main():
 
 # Function to hash passwords
 def hash_password(password):
+    """Hash a password using SHA-256."""
     return hashlib.sha256(password.encode()).hexdigest()
 
 # Function to display signup form
 def signup():
+    """Display and handle the signup form."""
     st.subheader("Create a New Account")
     new_username = st.text_input("Username", key="new_username")
     new_password = st.text_input("Password", type="password", key="new_password")
@@ -267,6 +272,7 @@ def signup():
 
 # Function to display login form
 def login():
+    """Display and handle the login form."""
     st.subheader("Login to Your Account")
     username = st.text_input("Username", key="username")
     password = st.text_input("Password", type="password", key="password")
@@ -286,6 +292,7 @@ def login():
 
 # Function to display welcome page
 def welcome_page():
+    """Display the welcome page for logged-in users."""
     # Centered layout
     col_left, col_center, col_right = st.columns([1, 3, 1])
     
@@ -346,6 +353,7 @@ def welcome_page():
 
 # Function to display login/signup page
 def login_signup_page():
+    """Display the login and signup page for unauthenticated users."""
     # Centered layout
     col_left, col_center, col_right = st.columns([1, 3, 1])
     
@@ -384,6 +392,7 @@ def login_signup_page():
 
 # Main app logic
 def main():
+    """Run the main application logic."""
     if not st.session_state.logged_in:
         login_signup_page()
     else:
